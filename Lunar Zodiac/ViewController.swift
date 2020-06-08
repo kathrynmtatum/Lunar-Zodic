@@ -11,8 +11,11 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var animalImageView: UIImageView!
+    @IBOutlet weak var animalLabel: UILabel!
     
     var currentImageNumnber = 0
+    var currentYear = 2020
+    var animalNames = ["RAT", "OX", "TIGER", "RABBIT", "DRAGON", "SNAKE", "HORSER", "GOAT", "MONKEY", "ROOSTER", "DOG", "PIG"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,22 +23,23 @@ class ViewController: UIViewController {
     }
 
 
-    @IBAction func leftButtonPressed(_ sender: UIButton) {
-        currentImageNumnber = currentImageNumnber - 1
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        print("You just pressed the button with tag \(sender.tag).")
+        
+        currentImageNumnber = currentImageNumnber + sender.tag
         if currentImageNumnber < 0 {
             currentImageNumnber = 11
-        }
-        animalImageView.image = UIImage(named: "image\(currentImageNumnber)")
-        
-    }
-    
-    @IBAction func rightButtonPressed(_ sender: UIButton) {
-        currentImageNumnber = currentImageNumnber + 1
-        if currentImageNumnber > 11 {
+        } else if currentImageNumnber > 11 {
             currentImageNumnber = 0
         }
-        animalImageView.image = UIImage(named: "image\(currentImageNumnber)")
-    }
-    
-}
+        print(currentImageNumnber)
+        var image_name = "image\(currentImageNumnber)"
+        print(image_name)
+        animalImageView.image = UIImage(named: image_name)
+        animalLabel.text = animalNames[currentImageNumnber]
+        
+        currentYear = currentYear + sender.tag
+        yearLabel.text = String(currentYear)
 
+}
+}
